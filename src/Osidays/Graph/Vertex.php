@@ -21,8 +21,9 @@ namespace Osidays\Graph;
 
 class Vertex
 {
-    protected $connections  = array();
-    protected $potential    = null;
+    protected $connections              = array();
+    protected $potential                = null;
+    protected $vertexGivingPotential    = null;
     
     public function connect(Vertex $vertex, $distance = 1)
     {
@@ -42,9 +43,15 @@ class Vertex
         return $this->potential;
     }
     
-    public function setPotential($potential)
+    public function getVertexGivingPotential()
     {
-        $this->potential = (int) $potential;
+        return $this->vertexGivingPotential;
+    }
+    
+    public function setPotential($potential, Vertex $vertex = null)
+    {
+        $this->potential                = (int) $potential;
+        $this->vertexGivingPotential    = $vertex;
     }
 }
 

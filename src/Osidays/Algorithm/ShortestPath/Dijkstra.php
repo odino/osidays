@@ -28,9 +28,11 @@ class Dijkstra
     protected $endingVertex;
     protected $startingVertex;
     
-    public function __construct(Graph $graph)
+    public function __construct(Graph $graph, Vertex $from, Vertex $to)
     {
-        $this->graph = $graph;
+        $this->graph            = $graph;
+        $this->startingVertex   = $from;
+        $this->endingVertex     = $to;
     }
     
     public function getGraph()
@@ -47,7 +49,7 @@ class Dijkstra
                 $this->getEndingVertex()
         );
         
-        while ($vertex->getId() != $this->getStartingVertex()->getId()) {
+        while ($vertex != $this->getStartingVertex()) {
             $path[] = $vertex;
             $vertex = $vertex->getVertexGivingPotential();
         }

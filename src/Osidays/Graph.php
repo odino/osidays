@@ -49,7 +49,7 @@ class Graph
             $potential = $vertex->getPotential() + $connection['distance'];
             
             if (!$neighbour->getPotential() || $potential < $neighbour->getPotential()) {
-                $connection['vertex']->setPotential($potential);
+                $neighbour->setPotential($potential, $vertex);
             }
             
             $this->assignConnectedPotentials($connection['vertex']);
