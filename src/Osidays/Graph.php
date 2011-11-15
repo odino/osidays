@@ -10,20 +10,17 @@
  */
 
 /**
- * Class Dijkstra
+ * Class Graph
  *
  * @package     Osidays
- * @subpackage  Algorithm
+ * @subpackage  Graph
  * @author      Alessandro Nadalin <alessandro.nadalin@gmail.com>
  */
 
-namespace Osidays\Algorithm\ShortestPath;
+namespace Osidays;
 
-class Dijkstra
+class Graph
 {
-    public function solve()
-    {
-        
-    }
+    
 }
 
