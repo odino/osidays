@@ -21,6 +21,9 @@ namespace Osidays;
 
 class Graph
 {
-    
+    public function calculatePotentials()
+    {  
+
+    }
 }
 
