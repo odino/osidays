@@ -18,9 +18,22 @@
  */
 
 use Osidays\Algorithm\ShortestPath\Dijkstra;
+use Osidays\Graph;
+use Osidays\Graph\Vertex;
 
 class DijkstraTest extends PHPUnit_Framework_TestCase
 {
-
+    public function testSolvingTheAlgorithm()
+    {
+        $bengaluru  = new Vertex;
+        $goa        = new Vertex;
+        $pune       = new Vertex;
+        $hyderabad  = new Vertex;
+        $solapur    = new Vertex;
+        $graph      = new Graph(array($bengaluru, $goa, $pune));
+        $algorithm  = new Dijkstra();
+        
+        $this->assertEquals(array($bengaluru, $goa, $pune), $algorithm->solve());
+    }
 }
 
