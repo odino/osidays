@@ -23,7 +23,18 @@ class Dijkstra
 {
     public function solve()
     {
+        $path   = array();
+        $vertex = $this->getEndingVertex();
+        $this->getGraph()->calculatePotentials();
         
+        while ($vertex->getId() != $this->getStartingVertex()->getId()) {
+            $path[] = $vertex;
+            $vertex = $vertex->getVertexGivingPotential();
+        }
+        
+        $path[] = $this->getStartingVertex();
+        
+        return array_reverse($path);
     }
 }
 

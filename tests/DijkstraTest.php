@@ -30,8 +30,14 @@ class DijkstraTest extends PHPUnit_Framework_TestCase
         $pune       = new Vertex;
         $hyderabad  = new Vertex;
         $solapur    = new Vertex;
-        $graph      = new Graph(array($bengaluru, $goa, $pune));
-        $algorithm  = new Dijkstra();
+        $graph      = new Graph(array(
+          $bengaluru, 
+          $goa, 
+          $pune,
+          $hyderabad,
+          $solapur,
+        ));
+        $algorithm  = new Dijkstra($graph);
         
         $this->assertEquals(array($bengaluru, $goa, $pune), $algorithm->solve());
     }
