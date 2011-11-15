@@ -38,6 +38,8 @@ class GraphTest extends PHPUnit_Framework_TestCase
           $node0, $node1, $node2, $node3
         ));
         
+        $graph->calculatePotentials($node0, $node3);
+        
         $this->assertEquals(3, $node1->getPotential());
         $this->assertEquals(0, $node0->getPotential());
         $this->assertEquals(4, $node2->getPotential());

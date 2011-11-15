@@ -42,7 +42,10 @@ class Dijkstra
     {
         $path   = array();
         $vertex = $this->getEndingVertex();
-        $this->getGraph()->calculatePotentials();
+        $this->getGraph()->calculatePotentials(
+                $this->getStartingVertex(), 
+                $this->getEndingVertex()
+        );
         
         while ($vertex->getId() != $this->getStartingVertex()->getId()) {
             $path[] = $vertex;
