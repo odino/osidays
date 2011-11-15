@@ -19,8 +19,25 @@
 
 namespace Osidays\Algorithm\ShortestPath;
 
+use Osidays\Graph;
+use Osidays\Graph\Vertex;
+
 class Dijkstra
 {
+    protected $graph;
+    protected $endingVertex;
+    protected $startingVertex;
+    
+    public function __construct(Graph $graph)
+    {
+        $this->graph = $graph;
+    }
+    
+    public function getGraph()
+    {
+        return $this->graph;
+    }
+    
     public function solve()
     {
         $path   = array();
@@ -35,6 +52,16 @@ class Dijkstra
         $path[] = $this->getStartingVertex();
         
         return array_reverse($path);
+    }
+    
+    protected function getEndingVertex()
+    {
+        return $this->endingVertex;
+    }
+    
+    protected function getStartingVertex()
+    {
+        return $this->startingVertex;
     }
 }
 
