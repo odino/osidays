@@ -63,14 +63,14 @@ class Dijkstra
     {
         foreach ($vertex->getConnections() as $connection)
         {
-            $neighbour = $connection['vertex'];
-            $potential = $vertex->getPotential() + $connection['distance'];
+            $neighbour = $connection->getDestination();
+            $potential = $vertex->getPotential() + $connection->getDistance();
             
             if (!$neighbour->getPotential() || $potential < $neighbour->getPotential()) {
                 $neighbour->setPotential($potential, $vertex);
             }
             
-            $this->assignConnectedPotentials($connection['vertex']);
+            $this->assignConnectedPotentials($connection->getDestination());
         }
     }
     

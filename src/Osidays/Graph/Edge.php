@@ -23,15 +23,30 @@ use Osidays\Graph\Vertex;
 
 class Edge
 {
-  protected $from;
-  protected $to;
+  protected $source;
+  protected $destination;
   protected $distance;
   
-  public function __construct(Vertex $from, Vertex $to, $distance)
+  public function __construct(Vertex $source, Vertex $destination, $distance)
   {
-    $this->from     = $from;
-    $this->to       = $to;
-    $this->distance = (int) $distance;
+    $this->source       = $source;
+    $this->destination  = $destination;
+    $this->distance     = (int) $distance;
+  }
+  
+  public function getDestination()
+  {
+    return $this->destination;
+  }
+  
+  public function getDistance()
+  {
+    return $this->distance;
+  }
+  
+  public function getSource()
+  {
+    return $this->source;
   }
 }
 
