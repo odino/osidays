@@ -30,30 +30,9 @@ class Graph
         $this->vertices = $vertices;
     }
     
-    public function calculatePotentials(Vertex $from, Vertex $to)
-    {  
-        $from->setPotential(0);
-        $this->assignConnectedPotentials($from);
-    }
-    
     public function getVertices()
     {
         return $this->vertices;
-    }
-    
-    protected function assignConnectedPotentials(Vertex $vertex)
-    {
-        foreach ($vertex->getConnections() as $connection)
-        {
-            $neighbour = $connection['vertex'];
-            $potential = $vertex->getPotential() + $connection['distance'];
-            
-            if (!$neighbour->getPotential() || $potential < $neighbour->getPotential()) {
-                $neighbour->setPotential($potential, $vertex);
-            }
-            
-            $this->assignConnectedPotentials($connection['vertex']);
-        }
     }
 }
 

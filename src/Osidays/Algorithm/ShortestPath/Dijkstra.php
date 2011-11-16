@@ -44,7 +44,7 @@ class Dijkstra
     {
         $path   = array();
         $vertex = $this->getEndingVertex();
-        $this->getGraph()->calculatePotentials(
+        $this->calculatePotentials(
                 $this->getStartingVertex(), 
                 $this->getEndingVertex()
         );
@@ -58,6 +58,27 @@ class Dijkstra
         
         return array_reverse($path);
     }
+    
+    protected function assignConnectedPotentials(Vertex $vertex)
+    {
+        foreach ($vertex->getConnections() as $connection)
+        {
+            $neighbour = $connection['vertex'];
+            $potential = $vertex->getPotential() + $connection['distance'];
+            
+            if (!$neighbour->getPotential() || $potential < $neighbour->getPotential()) {
+                $neighbour->setPotential($potential, $vertex);
+            }
+            
+            $this->assignConnectedPotentials($connection['vertex']);
+        }
+    }
+    
+    protected function calculatePotentials(Vertex $from, Vertex $to)
+    {  
+        $from->setPotential(0);
+        $this->assignConnectedPotentials($from);
+    }    
     
     protected function getEndingVertex()
     {
