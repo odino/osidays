@@ -27,6 +27,14 @@ class Edge
   protected $destination;
   protected $distance;
   
+  /**
+   * Builds a new Edge, setting the $source and $destination of the object and
+   * the distance between this 2 vertices.
+   *
+   * @param Vertex  $source
+   * @param Vertex  $destination
+   * @param int     $distance 
+   */
   public function __construct(Vertex $source, Vertex $destination, $distance)
   {
     $this->source       = $source;
@@ -34,16 +42,32 @@ class Edge
     $this->distance     = (int) $distance;
   }
   
+  /**
+   * Returns the destination of the edge.
+   *
+   * @return Vertex
+   */
   public function getDestination()
   {
     return $this->destination;
   }
   
+  /**
+   * Returns the distance between the vertices which are connected by the
+   * current object.
+   *
+   * @return int
+   */
   public function getDistance()
   {
     return $this->distance;
   }
   
+  /**
+   * Returns the source of the edge.
+   *
+   * @return Vertex
+   */
   public function getSource()
   {
     return $this->source;

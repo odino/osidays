@@ -25,11 +25,21 @@ class Graph
 {
     protected $vertices = array();
     
+    /**
+     * Builds a new Graph with the given $vertices.
+     *
+     * @param array $vertices 
+     */
     public function __construct(array $vertices)
     {
         $this->vertices = $vertices;
     }
     
+    /**
+     * Returns the vertices which belong to this graph.
+     *
+     * @return array
+     */
     public function getVertices()
     {
         return $this->vertices;

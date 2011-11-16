@@ -28,6 +28,14 @@ class Dijkstra
     protected $endingVertex;
     protected $startingVertex;
     
+    /**
+     * Creates a new algorithm object, setting the graph to be analyzed
+     * and the starting and ending vertices of the path we need to calculate.
+     *
+     * @param Graph   $graph
+     * @param Vertex  $from
+     * @param Vertex  $to 
+     */
     public function __construct(Graph $graph, Vertex $from, Vertex $to)
     {
         $this->graph            = $graph;
@@ -35,11 +43,21 @@ class Dijkstra
         $this->endingVertex     = $to;
     }
     
+    /**
+     * Returns the graph associated to this algorithm.
+     *
+     * @return Graph
+     */
     public function getGraph()
     {
         return $this->graph;
     }
     
+    /**
+     * Solves the algorithm.
+     *
+     * @return array The shortest path 
+     */
     public function solve()
     {
         $path   = array();
@@ -59,6 +77,15 @@ class Dijkstra
         return array_reverse($path);
     }
     
+    /**
+     * Assigns potentials to a $vertex, recursively doing this operation on the
+     * vertices to which the current $vertex is connected.
+     * A potential is assigned in 2 cases:
+     * - the $vertex has not potential
+     * - the new potential is lower than the previous one
+     *
+     * @param Vertex $vertex 
+     */
     protected function assignConnectedPotentials(Vertex $vertex)
     {
         foreach ($vertex->getConnections() as $connection)
@@ -80,11 +107,21 @@ class Dijkstra
         $this->assignConnectedPotentials($from);
     }    
     
+    /**
+     * Returns the destination of the path.
+     *
+     * @return Vertex
+     */
     protected function getEndingVertex()
     {
         return $this->endingVertex;
     }
     
+    /**
+     * Retrieves the starting vertex of the path.
+     *
+     * @return Vertex
+     */
     protected function getStartingVertex()
     {
         return $this->startingVertex;
