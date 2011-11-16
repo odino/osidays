@@ -19,23 +19,22 @@
 
 namespace Osidays\Graph;
 
+use Osidays\Graph\Edge;
+
 class Vertex
 {
-    protected $connections              = array();
+    protected $edges              = array();
     protected $potential                = null;
     protected $vertexGivingPotential    = null;
     
     public function connect(Vertex $vertex, $distance = 1)
     {
-        $this->connections[] = array(
-          'vertex'    => $vertex,
-          'distance'  => $distance,
-        );
+        $this->edges[] = new Edge($this, $vertex, $distance);
     }
     
     public function getConnections()
     {
-        return $this->connections;
+        return $this->edges;
     }
     
     public function getPotential()
