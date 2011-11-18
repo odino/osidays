@@ -48,34 +48,12 @@ class Dijkstra
      */
     public function solve()
     {
-        $path   = array();
-        $vertex = $this->getEndingVertex();
         $this->calculatePotentials(
                 $this->getStartingVertex(), 
                 $this->getEndingVertex()
         );
         
-        while ($vertex != $this->getStartingVertex()) {
-            if (!$vertex) {
-                return null;
-            }
-          
-            if ($vertex->getPotential() < 0) {
-              $message = sprintf(
-                  "%s's algorithm does not support negatively-connected vertices",
-                  __CLASS__
-              );
-              
-              throw new \LogicException($message);
-            }
-            
-            $path[] = $vertex;
-            $vertex = $vertex->getVertexGivingPotential();
-        }
-        
-        $path[] = $this->getStartingVertex();
-        
-        return array_reverse($path);
+        return $this->calculatePath();
     }
     
     /**
@@ -102,11 +80,61 @@ class Dijkstra
         }
     }
     
+    /**
+     * Calculates an array of vertices connecting the starting point of the
+     * algorithm to the ending point.
+     *
+     * @return array|null
+     */
+    protected function calculatePath()
+    {
+        $vertex = $this->getEndingVertex();
+        $path   = array();
+      
+        while ($vertex != $this->getStartingVertex()) {
+            if (!$vertex) {
+                return null;
+            }
+          
+            $this->checkPotential($vertex);
+            $path[] = $vertex;
+            $vertex = $vertex->getVertexGivingPotential();
+        }
+        
+        $path[] = $this->getStartingVertex();
+        
+        return array_reverse($path);
+    }
+    
+    /**
+     * Sets the potentials to each Vertex between $from and $to.
+     *
+     * @param Vertex $from
+     * @param Vertex $to 
+     */
     protected function calculatePotentials(Vertex $from, Vertex $to)
     {  
         $from->setPotential(0);
         $this->assignConnectedPotentials($from);
-    }    
+    }
+    
+    /**
+     * Checks that the given $vertex has non-negative potential.
+     *
+     * @param   Vertex $vertex 
+     * @throws  \LogicException
+     */
+    protected function checkPotential(Vertex $vertex)
+    {
+        if ($vertex->getPotential() < 0) {
+          $message = sprintf(
+              "%s's algorithm does not support negatively-connected vertices",
+              __CLASS__
+          );
+
+          throw new \LogicException($message);
+        }
+    }
     
     /**
      * Returns the destination of the path.
