@@ -68,7 +68,7 @@ class Dijkstra
                 $this->getEndingVertex()
         );
         
-        while ($vertex != $this->getStartingVertex()) {
+        while ($vertex && $vertex != $this->getStartingVertex()) {
             if ($vertex->getPotential() < 0) {
               $message = sprintf(
                   "%s's algorithm does not support negatively-connected vertices",

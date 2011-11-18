@@ -37,15 +37,15 @@ class DijkstraTest extends PHPUnit_Framework_TestCase
           $hyderabad,
           $solapur,
         ));
-        
+
         $bengaluru->connect($goa, 558);
         $goa->connect($pune, 449);
         $bengaluru->connect($hyderabad, 579);
         $hyderabad->connect($solapur, 306);
         $solapur->connect($pune, 251);
-        
+
         $algorithm  = new Dijkstra($graph, $bengaluru, $pune);
-        
+
         $this->assertEquals(array($bengaluru, $goa, $pune), $algorithm->solve());
     }
     
@@ -54,14 +54,17 @@ class DijkstraTest extends PHPUnit_Framework_TestCase
      */
     public function testAnExceptionIsRaisedWithNegativelyConnectedVertices()
     {
-        $bengaluru  = new Vertex;
-        $goa        = new Vertex;
-        $graph      = new Graph(array(
+        $bengaluru  = $this->getMock('Osidays\Graph\Vertex', array('connect', 'getPotential'));
+        $goa        = $this->getMock('Osidays\Graph\Vertex', array('connect', 'getPotential'));
+        $graph      = $this->getMock('Osidays\Graph', null, array(
+          array($bengaluru, $goa), 
           $bengaluru, 
-          $goa, 
-        ));
-        
-        $bengaluru->connect($goa, -30);
+          $goa
+        ));        
+        $goa->expects($this->any())
+                  ->method('getPotential')
+                  ->will($this->returnValue(-1));
+
         $algorithm  = new Dijkstra($graph, $bengaluru, $goa);
         $algorithm->solve();
     }
