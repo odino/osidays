@@ -48,5 +48,22 @@ class DijkstraTest extends PHPUnit_Framework_TestCase
         
         $this->assertEquals(array($bengaluru, $goa, $pune), $algorithm->solve());
     }
+    
+    /**
+     * @expectedException \LogicException
+     */
+    public function testAnExceptionIsRaisedWithNegativelyConnectedVertices()
+    {
+        $bengaluru  = new Vertex;
+        $goa        = new Vertex;
+        $graph      = new Graph(array(
+          $bengaluru, 
+          $goa, 
+        ));
+        
+        $bengaluru->connect($goa, -30);
+        $algorithm  = new Dijkstra($graph, $bengaluru, $goa);
+        $algorithm->solve();
+    }
 }
 
