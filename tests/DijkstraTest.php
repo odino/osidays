@@ -26,7 +26,7 @@ class DijkstraTest extends PHPUnit_Framework_TestCase
     /**
      * @dataProvider provider
      */
-    public function testSolvingTheAlgorithm(array $path, $algorithm)
+    public function testSolvingTheAlgorithm($path, $algorithm)
     {
         $this->assertEquals($path, $algorithm->solve());
     }
@@ -70,9 +70,13 @@ class DijkstraTest extends PHPUnit_Framework_TestCase
         $set2 = array(
             array($bengaluru, $goa, $pune), new Dijkstra($bengaluru, $pune),
         );
+
+        $set3 = array(
+            null, new Dijkstra($pune, $bengaluru),
+        );
         
         return array(
-            $set1, $set2
+            $set1, $set2, $set3
         );
     }
 }
