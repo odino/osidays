@@ -44,16 +44,6 @@ class Dijkstra
     }
     
     /**
-     * Returns the graph associated to this algorithm.
-     *
-     * @return Graph
-     */
-    public function getGraph()
-    {
-        return $this->graph;
-    }
-    
-    /**
      * Solves the algorithm.
      *
      * @return array The shortest path

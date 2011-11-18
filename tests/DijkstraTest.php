@@ -62,8 +62,8 @@ class DijkstraTest extends PHPUnit_Framework_TestCase
           $goa
         ));        
         $goa->expects($this->any())
-                  ->method('getPotential')
-                  ->will($this->returnValue(-1));
+            ->method('getPotential')
+            ->will($this->returnValue(-1));
 
         $algorithm  = new Dijkstra($graph, $bengaluru, $goa);
         $algorithm->solve();
