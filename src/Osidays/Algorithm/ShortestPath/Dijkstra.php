@@ -24,7 +24,6 @@ use Osidays\Graph\Vertex;
 
 class Dijkstra
 {
-    protected $graph;
     protected $endingVertex;
     protected $startingVertex;
     
@@ -32,13 +31,11 @@ class Dijkstra
      * Creates a new algorithm object, setting the graph to be analyzed
      * and the starting and ending vertices of the path we need to calculate.
      *
-     * @param Graph   $graph
      * @param Vertex  $from
      * @param Vertex  $to 
      */
-    public function __construct(Graph $graph, Vertex $from, Vertex $to)
+    public function __construct(Vertex $from, Vertex $to)
     {
-        $this->graph            = $graph;
         $this->startingVertex   = $from;
         $this->endingVertex     = $to;
     }
