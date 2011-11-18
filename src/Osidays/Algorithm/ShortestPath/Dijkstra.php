@@ -56,7 +56,8 @@ class Dijkstra
     /**
      * Solves the algorithm.
      *
-     * @return array The shortest path 
+     * @return array The shortest path
+     * @throws \LogicException
      */
     public function solve()
     {
@@ -68,6 +69,15 @@ class Dijkstra
         );
         
         while ($vertex != $this->getStartingVertex()) {
+            if ($vertex->getPotential() < 0) {
+              $message = sprintf(
+                  "%s's algorithm does not support negatively-connected vertices",
+                  __CLASS__
+              );
+              
+              throw new \LogicException($message);
+            }
+            
             $path[] = $vertex;
             $vertex = $vertex->getVertexGivingPotential();
         }
