@@ -23,23 +23,12 @@ use Osidays\Graph\Vertex;
 
 class DijkstraTest extends PHPUnit_Framework_TestCase
 {
-    public function testSolvingTheAlgorithm()
+    /**
+     * @dataProvider provider
+     */
+    public function testSolvingTheAlgorithm(array $path, $algorithm)
     {
-        $bengaluru  = new Vertex;
-        $goa        = new Vertex;
-        $pune       = new Vertex;
-        $hyderabad  = new Vertex;
-        $solapur    = new Vertex;
-
-        $bengaluru->connect($goa, 558);
-        $goa->connect($pune, 449);
-        $bengaluru->connect($hyderabad, 579);
-        $hyderabad->connect($solapur, 306);
-        $solapur->connect($pune, 251);
-
-        $algorithm  = new Dijkstra($bengaluru, $pune);
-
-        $this->assertEquals(array($bengaluru, $goa, $pune), $algorithm->solve());
+        $this->assertEquals($path, $algorithm->solve());
     }
     
     /**
@@ -55,6 +44,36 @@ class DijkstraTest extends PHPUnit_Framework_TestCase
 
         $algorithm  = new Dijkstra($bengaluru, $goa);
         $algorithm->solve();
+    }
+    
+    public function provider()
+    {
+        $a = new Vertex();
+        $b = new Vertex();
+        $a->connect($b, 1);
+        
+        $set1 = array(
+            array($a, $b), new Dijkstra($a, $b),
+        );
+        
+        $bengaluru  = new Vertex;
+        $goa        = new Vertex;
+        $pune       = new Vertex;
+        $hyderabad  = new Vertex;
+        $solapur    = new Vertex;
+        $bengaluru->connect($goa, 558);
+        $goa->connect($pune, 449);
+        $bengaluru->connect($hyderabad, 579);
+        $hyderabad->connect($solapur, 306);
+        $solapur->connect($pune, 251);
+
+        $set2 = array(
+            array($bengaluru, $goa, $pune), new Dijkstra($bengaluru, $pune),
+        );
+        
+        return array(
+            $set1, $set2
+        );
     }
 }
 
